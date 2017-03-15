@@ -27,9 +27,9 @@ if type == "m" or type == "music" or type == "M" or type == "Music":<br>
 else:<br>
     &nbsp; try: video = yt.get("mp4", "720p")<br>
     &nbsp; except: video = yt.get("mp4", "360p")<br>
-    &nbsp; video.download("/sdcard/Download")<br>
+    &nbsp; video.download("/sdcard/Download")<br> 
     &nbsp; print "Success"<br>
-    &nbsp; &nbsp; print filename + " is located in /sdcard/Download"<br>
+    &nbsp; print filename + " is located in /sdcard/Download"<br>
 </code>
 </body>
 </html>
