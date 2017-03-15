@@ -5,31 +5,31 @@
 </head>
 <body>
 <code>
-from os import chdir, getcwd, rename
-from pytube import YouTube
-
-print "YouTube Downloader by Alex Mulligan"
-
-yt = YouTube(input("URL: "))
-filename = input("Filename: ")
-yt.set_filename(filename)
-
-type = input("Music or Video (m/v): ")
-
-if type == "m" or type == "music" or type == "M" or type == "Music":
-    try: video = yt.get("mp4", "360p")
-    except: video = yt.get("mp4", "720p")
-    chdir("/sdcard/Music")
-    video.download(getcwd())
-    rename(filename + '.mp4', filename + '.mp3')
-    print "Success"
-    print filename + " is located at /sdcard/Music"
-else:
-    try: video = yt.get("mp4", "720p")
-    except: video = yt.get("mp4", "360p")
-    video.download("/sdcard/Download")
-    print "Success"
-    print filename + " is located in /sdcard/Download"
+from os import chdir, getcwd, rename<br>
+from pytube import YouTube<br>
+<br>
+print "YouTube Downloader by Alex Mulligan"<br>
+<br>
+yt = YouTube(input("URL: "))<br>
+filename = input("Filename: ")<br>
+yt.set_filename(filename)<br>
+<br>
+type = input("Music or Video (m/v): ")<br>
+<br>
+if type == "m" or type == "music" or type == "M" or type == "Music":<br>
+    try: video = yt.get("mp4", "360p")<br>
+    except: video = yt.get("mp4", "720p")<br>
+    chdir("/sdcard/Music")<br>
+    video.download(getcwd())<br>
+    rename(filename + '.mp4', filename + '.mp3')<br>
+    print "Success"<br>
+    print filename + " is located at /sdcard/Music"<br>
+else:<br>
+    try: video = yt.get("mp4", "720p")<br>
+    except: video = yt.get("mp4", "360p")<br>
+    video.download("/sdcard/Download")<br>
+    print "Success"<br>
+    print filename + " is located in /sdcard/Download"<br>
 </code>
 </body>
 </html>
