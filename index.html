@@ -23,7 +23,7 @@ if type == "m" or type == "music" or type == "M" or type == "Music":<br>
     &nbsp; video.download(getcwd())<br>
     &nbsp; rename(filename + '.mp4', filename + '.mp3')<br>
     &nbsp; print "Success"<br>
-    &nbsp;print filename + " is located at /sdcard/Music"<br>
+    &nbsp; print filename + " is located at /sdcard/Music"<br>
 else:<br>
     &nbsp; try: video = yt.get("mp4", "720p")<br>
     &nbsp; except: video = yt.get("mp4", "360p")<br>
