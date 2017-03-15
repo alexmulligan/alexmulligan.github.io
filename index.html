@@ -17,19 +17,19 @@ yt.set_filename(filename)<br>
 type = input("Music or Video (m/v): ")<br>
 <br>
 if type == "m" or type == "music" or type == "M" or type == "Music":<br>
-    &Tab; try: video = yt.get("mp4", "360p")<br>
-    except: video = yt.get("mp4", "720p")<br>
-    chdir("/sdcard/Music")<br>
-    video.download(getcwd())<br>
-    rename(filename + '.mp4', filename + '.mp3')<br>
-    print "Success"<br>
-    print filename + " is located at /sdcard/Music"<br>
+    &nbsp; try: video = yt.get("mp4", "360p")<br>
+    &nbsp; except: video = yt.get("mp4", "720p")<br>
+    &nbsp; chdir("/sdcard/Music")<br>
+    &nbsp; video.download(getcwd())<br>
+    &nbsp; rename(filename + '.mp4', filename + '.mp3')<br>
+    &nbsp; print "Success"<br>
+    &nbsp;print filename + " is located at /sdcard/Music"<br>
 else:<br>
-    try: video = yt.get("mp4", "720p")<br>
-    except: video = yt.get("mp4", "360p")<br>
-    video.download("/sdcard/Download")<br>
-    print "Success"<br>
-    print filename + " is located in /sdcard/Download"<br>
+    &nbsp; try: video = yt.get("mp4", "720p")<br>
+    &nbsp; except: video = yt.get("mp4", "360p")<br>
+    &nbsp; video.download("/sdcard/Download")<br>
+    &nbsp; print "Success"<br>
+    &nbsp; print filename + " is located in /sdcard/Download"<br>
 </code>
 </body>
 </html>
