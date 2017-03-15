@@ -17,7 +17,7 @@ yt.set_filename(filename)<br>
 type = input("Music or Video (m/v): ")<br>
 <br>
 if type == "m" or type == "music" or type == "M" or type == "Music":<br>
-    try: video = yt.get("mp4", "360p")<br>
+    &Tab; try: video = yt.get("mp4", "360p")<br>
     except: video = yt.get("mp4", "720p")<br>
     chdir("/sdcard/Music")<br>
     video.download(getcwd())<br>
