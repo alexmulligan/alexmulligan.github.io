@@ -5,7 +5,7 @@
 from os import chdir, getcwd, rename
 from pytube import YouTube
 
-print "\nYouTube Downloader by Alex Mulligan\n"
+print "\nYouTube Downloader by Alex M\n"
 
 yt = YouTube(input("URL: "))
 filename = input("Filename: ")
@@ -25,5 +25,5 @@ else:
   try: video = yt.get("mp4", "720p")
   except: video = yt.get("mp4", "360p")
   video.download("/sdcard/Download")
-  print "Success"
+  print "\nSuccess"
   print filename + " is located in /sdcard/Download"
