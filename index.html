@@ -2,35 +2,36 @@
 <html>
 <head>
 	<!--<meta http-equiv="refresh" content="0; URL='http://192.168.1.82:8811'" />-->
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		code {
+			background-color: #DDD;
+			font-family: monospace;
+			font-size: 12px;
+			margin-left: 10px;
+		}
+	</style>
 </head>
 <body>
-<code>
-from os import chdir, getcwd, rename<br>
-from pytube import YouTube<br>
-<br>
-print "YouTube Downloader by Alex Mulligan"<br>
-<br>
-yt = YouTube(input("URL: "))<br>
-filename = input("Filename: ")<br>
-yt.set_filename(filename)<br>
-<br>
-type = input("Music or Video (m/v): ")<br>
-<br>
-if type == "m" or type == "music" or type == "M" or type == "Music":<br>
-    &nbsp; try: video = yt.get("mp4", "360p")<br>
-    &nbsp; except: video = yt.get("mp4", "720p")<br>
-    &nbsp; chdir("/sdcard/Music")<br>
-    &nbsp; video.download(getcwd())<br>
-    &nbsp; rename(filename + '.mp4', filename + '.mp3')<br>
-    &nbsp; print "Success"<br>
-    &nbsp; print filename + " is located at /sdcard/Music"<br>
-else:<br>
-    &nbsp; try: video = yt.get("mp4", "720p")<br>
-    &nbsp; except: video = yt.get("mp4", "360p")<br>
-    &nbsp; video.download("/sdcard/Download")<br> 
-    &nbsp; print "Success"<br>
-    &nbsp; print filename + " is located in /sdcard/Download"<br>
-</code>
+	<h1>Installation:</h1>
+	<p>Once you have the QPython 2 app, create a script in the app and copy the contents of <a href="https://github.com/alexmulligan/alexmulligan.github.io/blob/master/YT-Download.py">this</a> script into it.</p>
+	<h1>Usage:</h1>
+	<p>It will ask for the URL, a filename, and if it is music or a video.<br>
+	Enter the URL of the YouTube video URL, whatever you want the file to be called, and m for music or v for video.<br>
+	Everything should be surrounded by quotes ("") when you enter it. This is VERY important.</p>
+	<br>
+	<p>This is what it should look like when you use it:<p>
+	<code>
+		YouTube Downloader by Alex M
+		
+		URL: "https://youtube.com/watch?v=..."
+		Filename: "The Name you Want"
+		Music or Video (m/v): "m" (or "v" for videos)
+		Success
+		The Name you Want is located at /sdcard/Music (or /sdcard/Download for videos)
+	</code>
 </body>
 </html>
 
