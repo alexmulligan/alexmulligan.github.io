@@ -19,7 +19,7 @@
 
  - **JavaFX** - Java**
 
- - **Tkinter*** - Python
+ - **Tkinter** - Python*
 
  - **PyQT** or **PySide** - Python*
 
