@@ -90,6 +90,8 @@
  - Chat App - Python _(images, emojis, etc.)_
 
  - youtubedl.github.io - Front End Web
+ 
+ - PseudoPython
 
 ## Future projects
 
