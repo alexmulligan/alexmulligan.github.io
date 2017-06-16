@@ -53,6 +53,20 @@
 
  - **TypeScript**
 
+ - **Brython**
+
+ - **AMP**
+
+ - **PWA**
+
+ - **Web App**
+
+ - **SPA**
+
+ - **Responsive Design**
+
+ - **Performance Optimization**
+
 #### Back End
 
  - **JavaScript** (Node.js)
@@ -66,7 +80,6 @@
  - **Socket.io**
 
  - **Heroku**
-
 
 ## Current Projects
 
@@ -89,6 +102,8 @@
  - Notes - Web
 
  - Recipes - Web
+
+ - Mardown & Textile Website
 
 ## Ideas
 
@@ -114,7 +129,25 @@
 
  - Markup language & app
 
- - Mardown & Textile Website
+## Things to learn/look at
+
+ - Cython
+
+ - UWP
+
+ - Haskell/F#/Scala
+
+ - Groovy
+
+ - Java to Executable
+
+ - Google Loader
+
+ - JavaScript Promises
+
+ - Networking...
+
+ - Langs
 
 <br />
 
