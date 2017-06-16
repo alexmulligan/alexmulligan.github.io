@@ -119,7 +119,7 @@
 
  - App for keeping notes _(markup languages, images, etc.)_
 
- - Email Client _(Probably just an inbox; markup languages)
+ - Email Client _(Probably just an inbox; markup languages)_
 
  - Contacts
 
@@ -153,5 +153,5 @@
 
 <br />
 
-<span>* Python programs must be frozen into an executable<br /></span>
+<span>* Python programs must be frozen into an executable*<br /></span>
 <span>** Java programs need a wrapper to make an executable</span>
