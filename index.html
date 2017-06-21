@@ -20,7 +20,6 @@ body {
   text-align: center;
 }
 div {
-  display: block;
   width: 100%;
   text-align: center;
 }
@@ -95,8 +94,8 @@ div {
 var before = document.getElementById("before");
 var after = document.getElementById("after");
 function change() {
-	before.style = "display: none";
-	after.style = "display: block";
+	before.style = "display: none!important";
+	after.style = "display: block !important";
 }
 var btn = document.querySelector('.btn');
 btn.onclick = change;
