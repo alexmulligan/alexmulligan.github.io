@@ -18,33 +18,27 @@
 body {
   font-family: sans-serif;
   background-color: #2087d2;
-  text-align: center;
 }
-
 div {
-  display: block;
+  display: flex;
   width: 100%;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
-
 /* Divs */
-
 #before {
-  display: block;
+  display: -webkit-flex;
+  display: flex;
 }
-
 #after {
   display: none;
   color: #fff;
   text-shadow: 1px 1px 1px #666;
 }
-
 #after:hover {
   text-shadow: 2px 2px 2px #666;
 }
-
 /* Button */
-
 .btn {
   color: #ffffff;
   font-size: 30px;
@@ -54,13 +48,10 @@ div {
   text-decoration: none;
   box-shadow: 1px 1px 1px #555;
 }
-
 .btn:hover{
   box-shadow: 2px 2px 2px #555;
 }
-
 /* media queries */
-
 @media (max-width: 400px) {
   div {
     margin-top: 50%;
@@ -99,20 +90,16 @@ div {
 	<div id="before">
   		<button class='btn'>Click Me</button>
 	</div>
-
 	<div id="after">
   		<h1 class="message">You are <span class="message"> GAY</span></h1>
 	</div>
-
 	<script>
 var before = document.getElementById("before");
 var after = document.getElementById("after");
-
 function change() {
 	before.style = "display: none";
-	after.style = "display: block";
+	after.style = "display: -webkit-flex; display: flex";
 }
-
 var btn = document.querySelector('.btn');
 btn.onclick = change;
 	</script>
