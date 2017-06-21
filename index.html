@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
 	<title>Surprise</title>
+    <meta charset="utf-8">
 	<meta name="description" content="Surprise">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
@@ -12,24 +12,21 @@
 
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-	<!-- ==================== -->
-
+    <!-- css -->
 	<style>
 body {
   font-family: sans-serif;
   background-color: #2087d2;
+  text-align: center;
 }
 div {
-  display: -webkit-flex;
-  display: flex;
+  display: block;
   width: 100%;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 /* Divs */
 #before {
-  display: -webkit-flex;
-  display: flex;
+  display: block;
 }
 #after {
   display: none;
@@ -99,7 +96,7 @@ var before = document.getElementById("before");
 var after = document.getElementById("after");
 function change() {
 	before.style = "display: none";
-	after.style = "display: -webkit-flex; display: flex";
+	after.style = "display: block";
 }
 var btn = document.querySelector('.btn');
 btn.onclick = change;
