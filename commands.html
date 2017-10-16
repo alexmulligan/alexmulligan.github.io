@@ -1,0 +1,527 @@
+<html><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>ICE Compiler Commands List</title>
+		<script src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script>
+			function scrollto(target) {
+				$("body").animate({ scrollTop: $('#' + target).offset().top }, 1500);
+			}
+		</script>
+		<style type="text/css">
+			body{
+				margin:0;
+				padding:0;
+				font-family: Sans-Serif;
+				line-height: 1.5em;
+			}
+			
+			main {
+				padding-bottom: 10010px;
+				margin-bottom: -10000px;
+				float: left;
+				width: 100%;
+			}
+			
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+			
+			td:nth-child(3) {
+				text-align: center;
+				width: 50px;
+			}
+			
+			table#special td:nth-child(3) {
+				width: 100%;
+				text-align: left;
+			}
+			
+			td:nth-child(1) {
+				width: 300px;
+			}
+			
+			th {
+				background-color: #AAA;
+			}
+			
+			#nav {
+				float: left;
+				width: 230px;
+				padding-bottom: 10010px;
+				margin-bottom: -10000px;
+				background: #eee;
+				position: fixed;
+			}
+			
+			#wrapper {
+				overflow: hidden;
+			}
+			
+			#content {
+				margin-left: 230px; /* Same as 'nav' width */
+			}
+			
+			.innertube{
+				margin: 15px; /* Padding for content */
+				margin-top: 0;
+			}
+			
+			p {
+				color: #555;
+			}
+	
+			nav ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			
+			nav ul a {
+				color: darkgreen;
+				text-decoration: none;
+			}
+			
+			#bl {
+				color: #00C;
+				font-weight: bold;
+			}
+			
+			#red {
+				color: #F00;
+			}
+			
+			#grey {
+				color: #999;
+			}
+			
+			#gr {
+				color: #0F0;
+			}
+			
+			#or {
+				color: #FFA500;
+			}
+			
+			#pu {
+				color: #551A8B;
+			}
+	
+		</style>	
+	</head>
+	
+	<body>
+		<div id="wrapper">
+			<main>
+				<div id="content">
+					<div class="innertube">
+						<h1>ICE Compiler Commands List v1.5</h1>
+						Some custom tokens are available by pressing [TRACE] in the BASIC program editor.
+						<h3 id="system">System</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="bl">getKey</span></td><td>Returns the key being pressed. <i>Note: this functions returns different values from the BASIC getKey, see the chart with the keycodes!</i></td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">getKey</span>(<span id="or">KEY</span>)</td><td>Returns 1 if the key <span id="or">KEY</span> is pressed, 0 otherwise. This routine is much, much faster than <span id="bl">getKey</span>, and handles repeated keypresses as well. Same key values as above.</td><td>20+8X</td>
+								</tr>
+								<tr>
+									<td><span id="bl">rand</span></td><td>Returns a random number between 0 and 16777215.</td><td>28+4X</td>
+								</tr>
+								<tr>
+									<td><span id="bl">ExecHex(</span><span id="grey">HEX</span><span id="bl">)</span></td><td>Assembly code written in hexadecimal is inserted into the program.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Pause</span> <span id="red">EXP</span></td><td>Pauses the program for <span id="red">EXP</span> milliseconds. If <span id="red">EXP</span> is omitted, it waits until the user pressed [ENTER], like the Pause command in BASIC.</td><td>18</td>
+								</tr>
+								<tr>
+									<td><span id="bl">prgm</span><span id="grey">PROGRAM</span></td><td>Executes the BASIC program <span id="grey">PROGRAM</span>. This is not an ICE program and won't be compiled. <span id="red"><b><i>Note: please be sure that the BASIC program doesn't contain an error, I can't guarentee what will happen then!</i></b></span></td><td>18</td>
+								</tr>
+								<tr>
+									<td><span id="bl"><i>i</i></span></td><td>If the imaginary <i>i</i> (not the lowercase i) is the first token of a line, this line will be ignored during compiling.</td><td>0</td>
+								</tr>
+								<tr>
+									<td><span id="bl">CompilePrgm(</span><span id="grey">PROGRAM</span><span id="bl">)</span></td><td>Program <span id="grey">PROGRAM</span> will be compiled, when ICE reads this function. Is useful for storing sprite data, which will not be in the main code.</td><td>0</td>
+								</tr>
+                                <tr>
+									<td><span id="bl">SetBASICVar(</span><span id="gr">VAR</span>,<span id="red">VALUE</span><span id="bl">)</span></td><td>This sets <span id="red">VALUE</span> to the BASIC variable <span id="gr">VAR</span>. Only A-θ are valid.</td><td>105+6X</td>
+								</tr>
+                                <tr>
+									<td><span id="bl">GetBASICVar(</span><span id="gr">VAR1</span>,<span id="gr">VAR2</span><span id="bl">)</span></td><td>This gets the BASIC variable <span id="gr">VAR1</span> and stores it to the ICE variable <span id="gr">VAR2</span>. Only A-θ are valid in both cases</td><td>23+9X</td>
+								</tr>
+							</table>
+						<h3 id="math">Math</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="gr">VAR</span></td><td>Returns the value of <span id="gr">VAR</span>. Valid variables are A-θ.</td><td>3</td>
+								</tr>
+								<tr>
+									<td><span id="or">CONST</span></td><td>Returns <span id="or">CONST</span>.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> + <span id="red">EXP2</span></td><td>Adds <span id="red">EXP2</span> to <span id="red">EXP1</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> - <span id="red">EXP2</span></td><td>Substracts <span id="red">EXP2</span> from <span id="red">EXP1</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> * <span id="red">EXP2</span></td><td>Multiplies <span id="red">EXP1</span> with <span id="red">EXP2</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> / <span id="red">EXP2</span></td><td>Divides <span id="red">EXP1</span> by <span id="red">EXP2</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> = <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> = <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> ≠ <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> ≠ <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> > <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> > <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> ≥ <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> ≥ <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> ≤ <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> ≤ <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> ≠ <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> ≠ <span id="red">EXP2</span>, 0 otherwise.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> <span id="bl">and</span> <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> and <span id="red">EXP2</span> are both not equal to 0, 0 otherwise</span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> <span id="bl">or</span> <span id="red">EXP2</span></td><td>Returns 1 if <span id="red">EXP1</span> or <span id="red">EXP2</span> is not equal to 0, 0 otherwise</span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span> <span id="bl">xor</span> <span id="red">EXP2</span></td><td>Returns 1 if one of <span id="red">EXP1</span> and <span id="red">EXP2</span> is not equal to 0, 0 otherwise</span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span>→<span id="gr">VAR</span></td><td>Stores <span id="red">EXP1</span> into <span id="gr">VAR</span>.</td><td>3</td>
+								</tr>
+								<tr>
+									<td><span id="bl">not(</span><span id="red">EXP</span><span id="bl">)</span></td><td>Returns the negation of <span id="red">EXP</span>, so if <span id="red">EXP</span> is nonzero, it returns 0, and 1 otherwise.</td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">remainder(</span><span id="red">EXP1</span>,<span id="red">EXP2</span><span id="bl">)</span></td><td>Returns the remainder of <span id="red">EXP1</span>/<span id="red">EXP2</span>.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">min(</span><span id="red">EXP1</span>,<span id="red">EXP2</span><span id="bl">)</span></td><td>Returns the minimum of <span id="red">EXP1</span> and <span id="red">EXP2</span>.</td><td>7</td>
+								</tr>
+								<tr>
+									<td><span id="bl">max(</span><span id="red">EXP1</span>,<span id="red">EXP2</span><span id="bl">)</span></td><td>Returns the maximum of <span id="red">EXP1</span> and <span id="red">EXP2</span>.</td><td>7</td>
+								</tr>
+								<tr>
+									<td><span id="bl">mean(</span><span id="red">EXP1</span>,<span id="red">EXP2</span><span id="bl">)</span></td><td>Returns the mean of <span id="red">EXP1</span> and <span id="red">EXP2</span>.</td><td>24+4X</td>
+								</tr>
+							</table>
+						<h3 id="controls">Controls</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="bl">If</span> <span id="red">EXP</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td>If <span id="red">EXP</span> is true, <span id="pu">code</span> will be executed.</td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">If</span> <span id="red">EXP</span>:<span id="pu">code1</span>:<span id="bl">Else</span>:<span id="pu">code2</span>:<span id="bl">End</span></td><td>If <span id="red">EXP</span> is true, <span id="pu">code1</span> will be executed, <span id="pu">code2</span> otherwise</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Repeat</span> <span id="red">EXP</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td>First it executes <span id="pu">code</span>. Then it checks if <span id="red">EXP</span> is true. If so, it jumps out of the loop, if not, it starts again with executing <span id="pu">code</span></td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">While</span> <span id="red">EXP</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td>First it checks if <span id="red">EXP</span> is true. If so, it jumps out of the loop. If not, it executes <span id="pu">code</span> over and over, until <span id="red">EXP</span> is true.</td><td>12</td>
+								</tr>
+								<tr>
+									<td></td><td><i>Note for both For-loops: if the fourth argument (the step size) is prepended by a negative sign (~), the fourth argument will be substracted from <span id="gr">VAR1</span>, instead of added.</i></td><td></td>
+								</tr>
+								<tr>
+									<td><span id="bl">For(</span><span id="gr">VAR</span>,<span id="red">EXP1</span>,<span id="red">EXP2</span>(,<span id="red">EXP3</span>)<span id="bl">)</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td><span id="gr">VAR</span> is initialized with <span id="red">EXP1</span>. If <span id="gr">VAR</span> is greater than <span id="red">EXP2</span>, the loop ends. Otherwise, <span id="pu">code</span> is executed. If <span id="red">EXP3</span> is omitted, <span id="gr">VAR</span> will be incremented. Otherwise <span id="red">EXP3</span> will be added to <span id="gr">VAR</span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="bl">For(</span><span id="gr">VAR1</span>,<span id="red">EXP1</span>,<span id="red">EXP2</span>,<span id="gr">VAR2</span><span id="bl">)</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td><span id="gr">VAR1</span> is initialized with <span id="red">EXP1</span>. If <span id="red">EXP1</span> is greater than <span id="red">EXP2</span>, the loop ends. Otherwise, <span id="pu">code</span> is executed, and <span id="gr">VAR2</span> will be added to <span id="gr">VAR1</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="bl">For(</span><span id="red">EXP</span><span id="bl">)</span>:<span id="pu">code</span>:<span id="bl">End</span></td><td>Executes <span id="pu">code</span> exactly <span id="red">EXP</span> times. The size of <span id="pu">code</span> should be smaller than 124 bytes, otherwise it give will you an error.</td><td>4</td>
+								</tr>
+							</table>
+						<h3 id="labels">Labels</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="bl">Lbl</span> <span id="grey">LABEL</span></td><td>Creates a label at the current position.</td><td>0</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Goto</span> <span id="grey">LABEL</span></td><td>Jumps to a label.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Call</span> <span id="grey">LABEL</span></td><td>Calls a label. This label should have a <span id="bl">Return</span>, otherwise the program will very likely crash.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Return</span></td><td>Returns. If you called a label before, and <span id="bl">Return</span> is in that label, the program will jump back to the main program. Otherwise, you program will end.</td><td>1</td>
+								</tr>
+								<tr>
+									<td><span id="bl">ReturnIf</span> <span id="red">EXP</span></td><td>Returns if <span id="red">EXP</span> is true. If you called a label before, and <span id="bl">ReturnIf</span> is in that label, the program will jump back to the main program. Otherwise, you program will end.</td><td>1</td>
+								</tr>
+							</table>
+						<h3 id="graphics">Graphics</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse" id="special">
+								<tr>
+									<th>Command</th><th>Name</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td></td><td colspan="2"><i>See "sprites.txt" for more information how to define sprites!</i></td><td></td>
+								</tr>
+								<tr>
+									<td><span id="bl">DefineSprite(</span><span id="red">WIDTH</span>,<span id="red">HEIGHT</span>,<span id="grey">"DATA"</span><span id="bl">)</span></td><td></td><td>Define a sprite with data <span id="grey">DATA</span>. The <span id="grey">DATA</span> should be in hexadecimals, where each 2 hexadecimals forms one pixel. The first defined sprite has index 0, the second 1, and so on.</td><td>0</td>
+								</tr>
+								<tr>
+									<td></td><td colspan="2"><i>Note: all these functions are C functions, and to run this, you need the C libraries and LibLoad. You can download these <a href="http://tiny.cc/clibs">here</a>. You need both LibLoad and graphx_vX.Y to run these functions. You can find the xLIBC color values <a href="http://dcs.cemetech.net/images/rgbhlpalette.png">here</a>. This palette is used in every function that draws on the screen.</i></td><td></td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>0<span id="bl">)</span></td><td>Begin</td><td>Sets up the graphics canvas (8bpp, default palette).</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>1<span id="bl">)</span></td><td>End</td><td>Closes the graphics library and sets up for the TI-OS.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>2,<span id="red">COLOR</span><span id="bl">)</span></td><td>SetColor</td><td>Sets the global color index for all routines.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>3<span id="bl">)</span></td><td>SetDefaultPalette</td><td>Sets up the default palette where H=L (xLIBC palette).</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>5,<span id="red">COLOR</span><span id="bl">)</span></td><td>FillScreen</td><td>Fills the screen with the specified color index.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>6,<span id="red">X</span>,<span id="red">Y</span><span id="bl">)</span></td><td>SetPixel</td><td>Sets the color pixel to the global color index.</td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>9,<span id="red">BUFFER</span><span id="bl">)</span></td><td>SetDraw</td><td>Forces drawing routines to operate on the offscreen buffer or to operate on the visible screen. 0 = draw at screen, 1 = draw at buffer.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>10<span id="bl">)</span></td><td>SwapDraw</td><td>Safely swap the vram buffer pointers for double buffered output.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>11,<span id="red">BUFFER</span><span id="bl">)</span></td><td>Blit</td><td>Copies the buffer image to the screen and vice versa. 0 = copy buffer to screen, 1 = copy screen to buffer.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>12,<span id="red">BUFFER</span>,<span id="red">Y</span>,<span id="red">LINES</span><span id="bl">)</span></td><td>BlitLines</td><td>Copies <span id="red">LINES</span> lines starting at position <span id="red">Y</span> from the buffer to the screen or vice versa. 0 = copy buffer to screen, 1 = copy screen to buffer.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>13,<span id="red">BUFFER</span>,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WIDTH</span>,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>BlitArea</td><td>Copies a specific rectangle starting at (<span id="red">X</span>,<span id="red">Y</span>) and dimensions (<span id="red">WIDTH</span>,<span id="red">HEIGHT</span>) from the buffer to the screen or vice versa. 0 = copy buffer to screen, 1 = copy screen to buffer.</td><td>14</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>14,<span id="red">CHAR</span><span id="bl">)</span></td><td>PrintChar</td><td>Places a character at the current cursor position. (Should be a number, you can find them <a href="http://tibasicdev.wikidot.com/83lgfont">here</a>. Default coordinates are (0,0).</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>16,<span id="red">EXP</span>,<span id="red">CHARS</span><span id="bl">)</span></td><td>PrintUInt</td><td>Places <span id="red">EXP</span> at the current cursor position with <span id="red">CHARS</span> characters. Default coordinates are (0,0).</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>17,<span id="grey">"STRING"</span><span id="bl">)</span></td><td>PrintString</td><td>Places a string at the current cursor position. Default coordinates are (0,0).</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>18,<span id="grey">"STRING"</span>,<span id="red">X</span>,<span id="red">Y</span><span id="bl">)</span></td><td>PrintStringXY</td><td>Places a string at the given coordinates.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>19,<span id="red">X</span>,<span id="red">Y</span><span id="bl">)</span></td><td>SetTextXY</td><td>Sets the coordinates for text routines.</td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>20,<span id="red">COLOR</span><span id="bl">)</span></td><td>SetTextBGColor</td><td>Sets the background text color for text routines. Default color is 255.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>21,<span id="red">COLOR</span><span id="bl">)</span></td><td>SetTextFGColor</td><td>Sets the foreground text color for text routines. Default color is 0.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>22,<span id="red">COLOR</span><span id="bl">)</span></td><td>SetTextTransparentColor</td><td>Sets the transparency text color for text routines. Default color is 255.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>25,<span id="red">SPACE</span><span id="bl">)</span></td><td>SetMonoSpaceFont</td><td>Sets the font to be monospace.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>30,<span id="red">X1</span>,<span id="red">Y1</span>,<span id="red">X2</span>,<span id="red">Y2</span><span id="bl">)</span></td><td>Line</td><td>Draws an arbitrarily clipped line.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>31,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">LENGTH</span><span id="bl">)</span></td><td>HorizLine</td><td>Draws an clipped horizontal line with the global color index.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>32,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">LENGTH</span><span id="bl">)</span></td><td>VertLine</td><td>Draws an clipped vertical line with the global color index.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>33,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">RADIUS</span><span id="bl">)</span></td><td>Circle</td><td>Draws a clipped circle outline.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>34,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">RADIUS</span><span id="bl">)</span></td><td>FillCircle</td><td>Draws an clipped filled circle.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>35,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WIDTH</span>,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>Rectangle</td><td>Draws an clipped rectangle outline with the global color index.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>36,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WIDTH</span>,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>FillRectangle</td><td>Draws an clipped rectangle with the global color index.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>37,<span id="red">X1</span>,<span id="red">Y1</span>,<span id="red">X2</span>,<span id="red">Y2</span><span id="bl">)</span></td><td>Line_NoClip</td><td>Draws an arbitrarily unclipped line.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>38,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">LENGTH</span><span id="bl">)</span></td><td>HorizLine_NoClip</td><td>Draws an unclipped horizontal line with the global color index.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>39,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">LENGTH</span><span id="bl">)</span></td><td>VertLine_NoClip</td><td>Draws an unclipped vertical line with the global color index.</td><td>10</td>
+								</tr>
+								
+								<tr>
+									<td><span id="bl">det(</span>40,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">RADIUS</span><span id="bl">)</span></td><td>FillCircle_NoClip</td><td>Draws an unclipped filled circle.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>41,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WIDTH</span>,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>Rectangle_NoClip</td><td>Draws an unclipped rectangle outline with the global color index.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>42,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WIDTH</span>,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>FillRectangle_NoClip</td><td>Draws an unclipped rectangle with the global color index.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>43,<span id="red">XMIN</span>,<span id="red">YMIN</span>,<span id="red">XMAX</span>,<span id="red">YMAX</span><span id="bl">)</span></td><td>SetClipRegion</td><td>Sets the clipping  for clipped routines.</td><td>12</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>45,<span id="red">PIXELS</span><span id="bl">)</span></td><td>ShiftDown</td><td>Shifts whatever is in the clip down by some pixels.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>46,<span id="red">PIXELS</span><span id="bl">)</span></td><td>ShiftUp</td><td>Shifts whatever is in the clip up by some pixels.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>47,<span id="red">PIXELS</span><span id="bl">)</span></td><td>ShiftLeft</td><td>Shifts whatever is in the clip left by some pixels.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>48,<span id="red">PIXELS</span><span id="bl">)</span></td><td>ShiftRight</td><td>Shifts whatever is in the clip right by some pixels.</td><td>6</td>
+								</tr>
+								<tr>
+									<td></td><td colspan="2"><i>Note: you need to define the sprite first!</i></td><td></td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>59,<span id="or">INDEX</span>,<span id="red">X</span>,<span id="red">Y</span><span id="bl">)</span></td><td>Sprite_NoClip</td><td>Places an sprite on the screen as fast as possible.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>60,<span id="or">INDEX</span>,<span id="red">X</span>,<span id="red">Y</span><span id="bl">)</span></td><td>TransparentSprite_NoClip</td><td>Draws a transparent sprite to the current buffer. The transparent color is 0.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>62,<span id="or">INDEX</span>,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WSCALE</span>,<span id="red">HSCALE</span><span id="bl">)</span></td><td>ScaledSprite_NoClip</td><td>Draws a scaled sprite to the screen.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>63,<span id="or">INDEX</span>,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">WSCALE</span>,<span id="red">HSCALE</span><span id="bl">)</span></td><td>ScaledTransparentSprite_NoClip</td><td>Draws a scaled sprite to the screen with transparency. The transparent color is 0.</td><td>10</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>71,<span id="red">X1</span>,<span id="red">Y1</span>,<span id="red">X2</span>,<span id="red">Y2</span>,<span id="red">X3</span>,<span id="red">Y3</span><span id="bl">)</span></td><td>FillTriangle</td><td>Draws a filled triangle with clipping.</td><td>16</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>72,<span id="red">X1</span>,<span id="red">Y1</span>,<span id="red">X2</span>,<span id="red">Y2</span>,<span id="red">X3</span>,<span id="red">Y3</span><span id="bl">)</span></td><td>FillTriangle_NoClip</td><td>Draws a filled triangle without clipping.</td><td>16</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>74,<span id="red">XSCALE</span>,<span id="red">YSCALE</span><span id="bl">)</span></td><td>SetTextScale</td><td>Changes the amount of text scaling (note that height and width are independent).</td><td>8</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>75,<span id="red">COLOR</span><span id="bl">)</span></td><td>SetTransparentColor</td><td>Sets the global transparent color index for all routines.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>76<span id="bl">)</span></td><td>ZeroScreen</td><td>Fills the current screen with a bunch of zeros. Same as det(5,0) but faster.</td><td>4</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>77,<span id="red">CONFIG</span><span id="bl">)</span></td><td>SetTextConfig</td><td>Configures text depending on the arguments. 1 = clipping, 2 = no clipping.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>81,<span id="red">HEIGHT</span><span id="bl">)</span></td><td>SetFontHeight</td><td>Sets the height of the font in pixels.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">det(</span>83,<span id="red">X</span>,<span id="red">Y</span>,<span id="red">COLOR</span><span id="bl">)</span></td><td>FloodFill</td><td>Fills an area with a color.</td><td>10</td>
+								</tr>
+							</table>
+						<h3 id="lists">Lists</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td>{<span id="or">CONST1</span>(,<span id="or">CONST2</span>...)}→<span id="grey">LIST</span></td><td>Stores constants into one of the 6 available lists. Only constants are allowed. These lists are available:</td><td>14+3X</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8321;</span></td><td>15500 bytes (saveSScreen) <span id="gr"><b>Safe</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8322;</span></td><td>8400 bytes (cmdPixelShadow) <span id="gr"><b>Safe</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8323;</span></td><td>8400 bytes (pixelShadow2) <span id="gr"><b>Safe</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8324;</span></td><td>21945 bytes (plotSScreen) <span id="or"><b>Medium</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8325;</span></td><td>8400 bytes (pixelShadow) <span id="or"><b>Medium</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">L&#8326;</span></td><td>1021 bytes (cursorImage) <span id="gr"><b>Safe</b></span></td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="grey">LIST</span>(<span id="red">EXP</span>)</td><td>Returns element <span id="red">EXP</span> of <span id="grey">LIST</span>.</td><td>2/4</td>
+								</tr>
+								<tr>
+									<td><span id="red">EXP1</span>→<span id="grey">LIST</span>(<span id="red">EXP2</span>)</td><td><span id="red">EXP1</span> is stored into element <span id="red">EXP2</span> of list <span id="grey">LIST</span></td><td>2/3</td>
+								</tr>
+							</table>
+						<h3 id="strings">Strings</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="grey">"STRING"</span></td><td>Adds a string to the program data. This can be used only in <span id="bl">Disp</span>.</td><td>X+1</td>
+								</tr>
+							</table>
+						<h3 id="text">Text</h3>
+							<table cellspacing="0" border="1" cellpadding="3" border-collapse="collapse">
+								<tr>
+									<th>Command</th><th>Description</th><th>Size</th>
+								</tr>
+								<tr>
+									<td><span id="bl">Disp</span> <span id="red">EXP1</span>(,<span id="red">EXP2</span>,...)</td><td>Displays either the outcome of an expression at the right of the screen, or displays a string at the left of the screen.</td><td>13/14X</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Output(</span><span id="red">ROW</span>,<span id="red">COLUMN</span>,<span id="red">EXP1</span><span id="bl">)</span></td><td>Displays either the outcome of an expression or a string at coordinates (<span id="red">ROW</span>,<span id="red">COLUMN</span>.</td><td>*</td>
+								</tr>
+								<tr>
+									<td><span id="bl">ClrHome</span></td><td>Clears the homescreen full. It is recommend to call this function before using <span id="bl">Disp</span>. The cursor moves to the upper-left corner.</td><td>6</td>
+								</tr>
+								<tr>
+									<td><span id="bl">Input</span> <span id="gr">VAR</span></td><td>Asks for a user input, and stores the value in <span id="gr">VAR</span></td><td>66+10X</td>
+								</tr>
+							</table>
+					</div>
+				</div>
+			</main>
+			
+			<nav id="nav">
+				<div class="innertube">
+					<h3>Category</h3>
+					<ul>
+						<li><a href="#" onClick="scrollto('system')">System</a></li>
+						<li><a href="#" onClick="scrollto('math')">Math</a></li>
+						<li><a href="#" onClick="scrollto('controls')">Controls</a></li>
+						<li><a href="#" onClick="scrollto('labels')">Labels</a></li>
+						<li><a href="#" onClick="scrollto('graphics')">Graphics</a></li>
+						<li><a href="#" onClick="scrollto('lists')">Lists</a></li>
+						<li><a href="#" onClick="scrollto('strings')">Strings</a></li>
+						<li><a href="#" onClick="scrollto('text')">Text</a></li>
+					</ul>
+				</div>
+			</nav>
+			
+		</div>
+	
+</body></html
