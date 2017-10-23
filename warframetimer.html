@@ -31,14 +31,14 @@ minutes_passed = to_minutes(time_passed)<br>
 <br>
 current_minute = minutes_passed % 150<br>
 if current_minute <= 100 then<br>
-    phase = day<br>
+    &nbsp; phase = day<br>
 else<br>
-    phase = night<br>
+    &nbsp; phase = night<br>
 <br>
 if phase == day then<br>
-    remaining_minutes = 100 - current_minute<br>
+    &nbsp; remaining_minutes = 100 - current_minute<br>
 else<br>
-    remaining_minutes = 50 - current_minute<br>
+    &nbsp; remaining_minutes = 50 - current_minute<br>
 <br>
 display It is currently {phase}<br>
 display {remaining_minutes} until {night if phase == day else day}
