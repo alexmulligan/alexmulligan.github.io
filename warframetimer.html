@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Warframe Timer Pseudo-code</title>
+    <style>
+* {
+  font-family: sans-serif;
+  font-size: 1.5em;
+}
+    </style>
+  </head>
+  <body>
+    <p>
+ /* Cycle:<br>
+ * <br>
+ * 12 days<br>
+ * 288 hours<br>
+ * 17280 minutes<br>
+ */<br>
+<br>
+starting_point = localize(new Date(US Eastern 10/23 @ 12:00 a.m.))<br>
+current_time = now()<br>
+time_passed = current_time - starting_point<br>
+minutes_passed = to_minutes(time_passed)<br>
+<br>
+current_minute = minutes_passed % 150<br>
+if current_minute <= 100 then<br>
+    phase = day<br>
+else<br>
+    phase = night<br>
+<br>
+if phase == day then<br>
+    remaining_minutes = 100 - current_minute<br>
+else<br>
+    remaining_minutes = 50 - current_minute<br>
+<br>
+display It is currently {phase}<br>
+display {remaining_minutes} until {night if phase == day else day}
+    </p>
+  </body>
+</html>
