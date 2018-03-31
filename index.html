@@ -1,54 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <title>Gifts</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-      * {
-        font-family: sans-serif;
-      }
-      body {
-        margin: none;
-        padding: none;
-      }
-      h1 {
-        font-size: 1.25em;
-      }
-      p {
-        font-size: 1em;
-      }
-      div {
-        margin: 2px;
-        margin-bottom: 1.5em;
-      }
-    </style>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <title>6502 assembler/simulator</title>
   </head>
   <body>
-    <div class="item">
-      <h1>Raspberry Pi 3 Model B and Power Supply</h1>
-      <p>Sold at <a target="_blank" href="https://www.amazon.com/CanaKit-Raspberry-Micro-Supply-Listed/dp/B01C6FFNY4/">Amazon.com</a></p>
+
+    <div class="widget">
+      <div class="buttons">
+        <input type="button" value="Assemble" class="assembleButton" />
+        <input type="button" value="Run" class="runButton" />
+        <input type="button" value="Reset" class="resetButton" />
+        <input type="button" value="Hexdump" class="hexdumpButton" />
+        <input type="button" value="Disassemble" class="disassembleButton" />
+        <input type="button" value="Notes" class="notesButton" />
+      </div>
+
+      <textarea class="code"></textarea>
+
+      <canvas class="screen" width="160" height="160"></canvas>
+
+      <div class="debugger">
+        <input type="checkbox" class="debug" name="debug" />
+        <label for="debug">Debugger</label>
+        <div class="minidebugger"></div>
+        <div class="buttons">
+          <input type="button" value="Step" class="stepButton" />
+          <input type="button" value="Jump to ..." class="gotoButton" />
+        </div>
+      </div>
+
+      <div class="monitorControls">
+        <label for="monitoring">Monitor</label>
+        <input type="checkbox" class="monitoring" name="monitoring" />
+
+        <label for="start">Start: $</label>
+        <input type="text" value="0" class="start" name="start" />
+        <label for="length">Length: $</label>
+        <input type="text" value="ff" class="length" name="length" />
+      </div>
+      <div class="monitor"><pre><code></code></pre></div>
+      <div class="messages"><pre><code></code></pre></div>
+
+      <div class="notes" style="display: none">Notes:
+
+Memory location $fe contains a new random byte on every instruction.
+Memory location $ff contains the ascii code of the last key pressed.
+
+Memory locations $200 to $5ff map to the screen pixels. Different values will
+draw different colour pixels. The colours are:
+
+$0: Black
+$1: White
+$2: Red
+$3: Cyan
+$4: Purple
+$5: Green
+$6: Blue
+$7: Yellow
+$8: Orange
+$9: Brown
+$a: Light red
+$b: Dark grey
+$c: Grey
+$d: Light green
+$e: Light blue
+$f: Light grey
     </div>
-    <div class="item">
-      <h1 class="title">SanDisk Ultra MicroSDHC Card - 32 GB Class 10 UHS-I</h1>
-      <p class="notes">Sold at <a target="_blank" href="https://www.amazon.com/gp/product/B010Q57T02/">Amazon.com</a></p>
-    </div>
-    <div class="item">
-      <h1 class="title">Raspberry Pi Case</h1>
-      <p class="notes">Sold at <a target="_blank" href="https://www.amazon.com/Raspberry-Pi-Case-Black-fits/dp/B00UW2G1BS/">Amazon.com</a></p>
-    </div>
-    <div class="item">
-      <h1 class="title">HDMI Cable 6'</h1>
-      <p class="notes">Sold at <a target="_blank" href="https://www.amazon.com/HDMI-Feet-Super-Resolution-Cable/dp/B000MMBTLA/">Amazon.com</a> (as Add-on Item)</p>
-    </div>
-    <div class="item">
-      <h1 class="title">Arteck 2.4GHz Wireless Keyboard</h1>
-      <p class="notes">Sold at <a target="_blank" href="https://www.amazon.com/Arteck-Wireless-Keyboard-Stainless-Rechargeable/dp/B073TSKFRX/">Amazon.com</a></p>
-    </div>
-    <div class="item">
-      <h1 class="title">Samsung 32GB USB 3.0 Flash Drive</h1>
-      <p class="notes">Sold at <a target="_blank" href="https://www.amazon.com/Samsung-METAL-Flash-MUF-32BA-AM/dp/B013CCTM2E/">Amazon.com</a></p>
-    </div>
-    <h5>we first had a short boy, now we had a long boy</h5>
+
+    <script src="es5-shim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="assembler.js"></script>
   </body>
 </html>
